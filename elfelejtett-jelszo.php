@@ -158,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
                 </p>
                 <div class="d-flex justify-content-center form_container">
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3" id="forgot-pass-email">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="login-email"><i class="fas fa-at"></i></span>
                             </div>
@@ -169,6 +169,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
                             <input type="submit" class="btn btn-primary" id="login-button" value="Küldés" style="background: #ee4a4a; border-color: #ee4a4a;">
                         </div>
                     </form>
+                </div>
+                <div class="mt-4">
+                    <div class="d-flex justify-content-center links" id="back-to-login">
+                        <a href="bejelentkezes.php" class="ml-2"><i class="fas fa-long-arrow-alt-left fa-lg"></i></a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1157,7 +1157,20 @@ td.safety-clickable-row {
     padding-bottom: 30px;
 }
 
+
+/* ---------------------------------------------------
+    FORGOT PASSWORD PAGE
+----------------------------------------------------- */
+
 .forgot-password-text {
     position: absolute;
     top: 100px;
+}
+
+#back-to-login {
+    float: left;
+}
+
+#forgot-pass-email {
+    padding-top: 50px;
 }
