@@ -4,6 +4,63 @@ session_start();
 // Incude config file
 require_once("config.php");
 
+$name_error = $email_error = $message_error = $message_success = "";
+
+if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message']) && isset($_POST["recaptcha_response"])) {
+
+    // Create POST request to send to Google
+    $recaptcha_url = "https://www.google.com/recaptcha/api/siteverify";
+    $recaptcha_secret = "6LcyIbMaAAAAAJmg94kSxlowWY_JZ-1e1505aw5z";
+    $recaptcha_response = $_POST["recaptcha_response"];
+
+    // Send POST request
+    $recaptcha = file_get_contents($recaptcha_url . "?secret=" . $recaptcha_secret . "&response=" . $recaptcha_response);
+
+    // Decode response
+    $recaptcha = json_decode($recaptcha);
+
+    // Check if verified
+    if ($recaptcha->success && $recaptcha->score >= 0.5) {
+
+        if (empty($_POST['name'])) {
+            $message_error = "Kérjük adja meg a nevét!";
+        } elseif (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $message_error = "Kérjük adja meg a valódi Email címét!";
+        } elseif (empty($_POST['message'])) {
+            $message_error = "Kérjük adja meg üzenetét!";
+        } else {
+            $to = "tarbence1@gmail.com";
+            $from = $_POST['email'];
+            $name = $_POST['name'];
+            $msg = $_POST['message'];
+            $subject = "motorsarok.hu - Új üzenet";
+            $message = "<html>
+                            <head>
+                            <title>Kedves admin!</title>
+                            </head>
+                            <body>
+                            <p>Új E-mail érkezett a motorsarok.hu weboldalról.</p>
+                            <p>Részletek:</p>
+                            <p>Név: " . $name . "</p>
+                            <p>Email: " . $from . "</p>
+                            <p>Üzenet: " . $msg . "</p>
+                            </body>
+                            </html>";
+
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= 'From: <motor@sarok.hu>' . "\r\n";
+            if (mail($to, $subject, $message, $headers)) {
+                $message_success = "Köszönjük üzenetét. Hamarosan felvesszük Önnel a kapcsolatot!";
+            } else {
+                $message_error = "Valami hiba történt. Kérjük próbálja meg később!";
+            }
+        }
+    } else {
+        $message_error = "A Google reCAPTCHA hibát észlelt, kérjük próbálja meg később!";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +88,11 @@ require_once("config.php");
     <link rel="stylesheet" href="assets/CSS/default.min.css">
     <!-- Alertify JS -->
     <script src="assets/JS/alertify.js"></script>
-
-    <script src="https://www.google.com/recaptcha/api.js?render=6LeR3rIaAAAAAKjUTE6FyajvWkC4mnsxGUw1eTt8"></script>
+    <!-- reCAPTCHA JS -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcyIbMaAAAAAMS8-tDa_NXYWljy7VawX6Hhlp34"></script>
     <script>
         grecaptcha.ready(function() {
-            grecaptcha.execute('6LeR3rIaAAAAAKjUTE6FyajvWkC4mnsxGUw1eTt8', {
+            grecaptcha.execute('6LcyIbMaAAAAAMS8-tDa_NXYWljy7VawX6Hhlp34', {
                 action: 'submit'
             }).then(function(token) {
                 let recaptchaResponse = document.getElementById('recaptchaResponse');
@@ -103,30 +160,18 @@ require_once("config.php");
                 <h3>Kapcsolat</h3>
                 <h5>Bármilyen kérdés, probléma esetén, töltse ki az alábbi mezőket és hamarosan felvesszük Önnel a kapcsolatot.</h5>
             </div>
-            <form action="contact.php" method="post" name="contact" id="contact-form">
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                        <label>Név</label>
-                        <input class="form-control" id="name" name="name" type="text" required>
-                        <span class="help-block" style="color: red;"><?php //echo $name_error; 
-                                                                        ?></span>
+            
+            <form action="" method="post" name="contact" id="contact-form">
+                <div class="form-row" id="contact-group">
+                    <div class="col">
+                        <input class="form-control" id="name" name="name" type="text" required placeholder="Név">
+                    </div>
+                    <div class="col">
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="Email cím">
                     </div>
                 </div>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                        <label for="email">Email cím</label>
-                        <input type="email" class="form-control" id="email" name="email" required="required">
-                        <span class="help-block" style="color: red;"><?php //echo $email_error; 
-                                                                        ?></span>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                        <label>Üzenet</label>
-                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                        <span class="help-block" style="color: red;"><?php //echo $message_error; 
-                                                                        ?></span>
-                    </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Üzenet"></textarea>
                 </div>
                 <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                 <br>
@@ -142,23 +187,22 @@ require_once("config.php");
         </div>
 
         <?php
-        if (isset($_SESSION['contactSuccess'])) {
+        if (!empty($message_success) && $message_success !== "") {
         ?>
             <script>
-                alertify.success('Sikeres küldés!');
+                alertify.success('<?php echo $message_success ?>');
             </script>
         <?php
-            unset($_SESSION['contactSuccess']);
         }
-        if (isset($_SESSION['contactError'])) {
+        if (!empty($message_error) && $message_error !== "") {
         ?>
             <script>
-                alertify.success("nemyo");
+                alertify.error('<?php echo $message_error ?>');
             </script>
         <?php
-            unset($_SESSION['contactError']);
         }
-        include('footer.php'); ?>
+        include('footer.php');
+        ?>
     </div>
 
     <!-- jQuery -->

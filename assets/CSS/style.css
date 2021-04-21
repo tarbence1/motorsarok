@@ -1152,3 +1152,12 @@ td.safety-clickable-row {
     padding-top: 30px;
     padding-bottom: 50px;
 }
+
+#contact-group {
+    padding-bottom: 30px;
+}
+
+.forgot-password-text {
+    position: absolute;
+    top: 100px;
+}

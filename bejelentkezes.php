@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
 
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="index.php">
                     <div class="nav-title">motor<span style="color: #ee4a4a">s</span>arok<span style="color: #ee4a4a">.</span>hu</div>
                 </a>
 
@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <ul class="nav navbar-nav ml-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Főoldal</a>
+                            <a class="nav-link" href="index.php">Főoldal</a>
                         </li>
 
                     </ul>
@@ -187,10 +187,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="mt-4">
                     <div class="d-flex justify-content-center links" id="register-link">
-                        <a href="register.php" class="ml-2">Regisztráció</a>
+                        <a href="regisztracio.php" class="ml-2">Regisztráció</a>
                     </div>
                     <div class="d-flex justify-content-center links" id="forgot-password-link">
-                        <a href="#">Elfelejtett jelszó</a>
+                        <a href="elfelejtett-jelszo.php">Elfelejtett jelszó</a>
                     </div>
                 </div>
             </div>
