@@ -85,8 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Display an error message if username doesn't exist
                     $username_err = "Érvénytelen felhasználónév/Email cím.";
                 }
-            } else {
-                echo "";
             }
         }
 

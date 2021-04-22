@@ -131,20 +131,20 @@ switch ($level) {
         </nav>
 
         <div class="container" id="welcome-text">
-            <h3>Üdvözöljük az oldalon, <b><?php echo $record['username']; ?></b>!</h3>
+            <h3>Üdvözöljük az oldalon, <b><?php echo htmlspecialchars($record['username']); ?></b>!</h3>
 
             <div class="image-upload">
                 <label for="file">
-                    <img src="<?php echo $avatar ?>" alt="Avatar" class="avatar" id="avatar-image" data-toggle="tooltip" title="Módosításhoz kattintson a képre" />
+                    <img src="<?php echo htmlspecialchars($avatar) ?>" alt="Avatar" class="avatar" id="avatar-image" data-toggle="tooltip" title="Módosításhoz kattintson a képre" />
                 </label>
                 <input id="file" type="file" name="file" />
             </div>
 
             <a href="logout.php" class="btn btn-danger" id="logout" role="button">Kijelentkezés</a>
-            <h5>Jelenlegi prémium csomag: <span id="premium"><?php echo $levelstr; ?></span></h5>
-            <h5>Lejárati dátuma: <span id="premiumexpiration"><?php echo is_null($record['premiumexpiration']) ? '-' : $record['premiumexpiration']; ?></span></h5>
+            <h5>Jelenlegi prémium csomag: <span id="premium"><?php echo htmlspecialchars($levelstr); ?></span></h5>
+            <h5>Lejárati dátuma: <span id="premiumexpiration"><?php echo is_null($record['premiumexpiration']) ? '-' : htmlspecialchars($record['premiumexpiration']); ?></span></h5>
             <hr>
-            <h5>Email cím: <span id="email-address"><?php echo $record['email']; ?></span></h5>
+            <h5>Email cím: <span id="email-address"><?php echo htmlspecialchars($record['email']); ?></span></h5>
             <div id="accordion">
                 <div class="card">
                     <div class="card-header" id="headingOne">

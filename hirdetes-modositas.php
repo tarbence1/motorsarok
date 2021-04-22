@@ -23,7 +23,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 } else {
-    //echo "<script> window.location.replace('index.php') </script>";
     header("Location: hirdeteseim.php");
 }
 
@@ -471,11 +470,6 @@ if (
 
             $stmt->close();
 
-
-
-
-
-
             $_SESSION['success-modify'] = true;
             echo "<script> window.location.replace('hirdeteseim.php') </script>";
         }
@@ -604,7 +598,7 @@ if (
             </nav>
 
             <div class="jumbotron">
-                <form action="hirdetes-modositas.php?id=<?php echo $id; ?>" method="post" enctype='multipart/form-data' id="add">
+                <form action="hirdetes-modositas.php?id=<?php echo htmlspecialchars($id); ?>" method="post" enctype='multipart/form-data' id="add">
                     <h2 class="display-6">Hirdetés módosítása</h2>
                     <ul class="fa-ul">
                         <li><span class="fa-li"><i class="fas fa-info-circle"></i></span><?= $moreImages > 0 ? 'További <b>' . $moreImages . '</b> db képet tölthet fel.' : 'Elérte a maximálisan feltölthető képek számát.' ?></li>
@@ -636,9 +630,9 @@ if (
                                     </div>
                                     <div class="card-body text-center">
                                         <?php
-                                        echo "<img src='" . $image . "' class='img-fluid img-thumbnail' id='thumbimages'  alt='thumbnail images'/>";
+                                        echo "<img src='" . htmlspecialchars($image) . "' class='img-fluid img-thumbnail' id='thumbimages'  alt='thumbnail images'/>";
                                         ?>
-                                        <input value="<?php echo $rec['id']; ?>" name="mainimageid" type="hidden">
+                                        <input value="<?php echo htmlspecialchars($rec['id']); ?>" name="mainimageid" type="hidden">
                                     </div>
                                     <div class="card-footer">
 
@@ -654,21 +648,21 @@ if (
                             } else {
                             ?>
 
-                                <div class="card col-md-3" id="thumbnailimage-card-<?php echo $rec['id']; ?>">
+                                <div class="card col-md-3" id="thumbnailimage-card-<?php echo htmlspecialchars($rec['id']); ?>">
                                     <div class="card-body text-center">
                                         <?php
-                                        echo "<img src='" . $image . "' class='img-fluid img-thumbnail' id='thumbimages' alt='thumbnail images'/>";
+                                        echo "<img src='" . htmlspecialchars($image) . "' class='img-fluid img-thumbnail' id='thumbimages' alt='thumbnail images'/>";
                                         ?>
                                     </div>
                                     <div class="card-footer">
-                                        <input type='submit' value="Törlés" class="btn btn-danger" name="delete" id="btn-delete<?php echo $rec['id'] ?>" />
+                                        <input type='submit' value="Törlés" class="btn btn-danger" name="delete" id="btn-delete<?php echo htmlspecialchars($rec['id']) ?>" />
                                     </div>
                                 </div>
 
                                 <!-- Set actual selected image  -->
                                 <script>
-                                    $("#btn-delete<?php echo $rec['id'] ?>").click(function() {
-                                        document.getElementById('actual-image').value = "<?php echo $rec['id'] ?>";
+                                    $("#btn-delete<?php echo htmlspecialchars($rec['id']) ?>").click(function() {
+                                        document.getElementById('actual-image').value = "<?php echo htmlspecialchars($rec['id']) ?>";
                                     });
                                 </script>
 
@@ -691,12 +685,12 @@ if (
                         <div class="form-group col-md-3">
                             <label for="manufacturer">Gyártó<span class="req">*</span></label>
                             <select class="form-control" id="manufacturer" name="manufacturer" required>
-                                <option selected value='<?php echo $manufacturer; ?>'><?php echo $manufacturer; ?></option>
+                                <option selected value='<?php echo htmlspecialchars($manufacturer); ?>'><?php echo htmlspecialchars($manufacturer); ?></option>
                                 <?php
                                 // Display manufacturers
                                 if ($manufacturers_result->num_rows > 0) {
                                     while ($row = $manufacturers_result->fetch_assoc()) {
-                                        echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                                        echo "<option value='" . htmlspecialchars($row['name']) . "'>" . htmlspecialchars($row['name']) . "</option>";
                                     }
                                 } else {
                                     echo 'Nincs elérhető gyártó!';
@@ -706,17 +700,17 @@ if (
                         </div>
                         <div class="form-group col-md-3">
                             <label for="model">Modell<span class="req">*</span></label>
-                            <input class="form-control" id="model" type="text" placeholder="Modell" name="model" value="<?php echo $model; ?>" required>
+                            <input class="form-control" id="model" type="text" placeholder="Modell" name="model" value="<?php echo htmlspecialchars($model); ?>" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="make">Kivitel<span class="req">*</span></label>
                             <select class="form-control" id="type" name="type" required>
-                                <option selected value='<?php echo $type; ?>'><?php echo $type; ?></option>
+                                <option selected value='<?php echo htmlspecialchars($type); ?>'><?php echo htmlspecialchars($type); ?></option>
                                 <?php
                                 // Display manufacturers
                                 if ($types_result->num_rows > 0) {
                                     while ($row = $types_result->fetch_assoc()) {
-                                        echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                                        echo "<option value='" . htmlspecialchars($row['name']) . "'>" . htmlspecialchars($row['name']) . "</option>";
                                     }
                                 } else {
                                     echo 'Nincs elérhető kivitel!';
@@ -726,7 +720,7 @@ if (
                         </div>
                         <div class="form-group col-md-3">
                             <label for="price">Vételár<span class="req">*</span></label>
-                            <input class="form-control" id="price" type="number" name="price" value="<?php echo $price; ?>" required>
+                            <input class="form-control" id="price" type="number" name="price" value="<?php echo htmlspecialchars($price); ?>" required>
                             <span class="unit">Ft</span>
                         </div>
                     </div>
@@ -735,7 +729,7 @@ if (
                             <label>Évjárat<span class="req">*</span></label>
                             <select id="made-year" class="form-control" name="year" required>
                                 <option value="" disabled>Év</option>
-                                <option selected value='<?php echo $year; ?>'><?php echo $year; ?></option>
+                                <option selected value='<?php echo htmlspecialchars($year); ?>'><?php echo htmlspecialchars($year); ?></option>
                                 <?php
                                 for ($i = 1950; $i <= date('Y'); $i++) {
                                     echo "<option value='" . $i . "'>" . $i . "</option>";
@@ -746,7 +740,7 @@ if (
                         <div class="form-group col-md-3" id="month-group">
                             <select id="made-month" class="form-control" name="month" required>
                                 <option value="" disabled>Hó</option>
-                                <option selected value='<?php echo $month; ?>'><?php echo $month; ?></option>
+                                <option selected value='<?php echo htmlspecialchars($month); ?>'><?php echo htmlspecialchars($month); ?></option>
                                 <?php
                                 for ($i = 1; $i <= 12; $i++) {
                                     echo "<option value='" . $i . "'>" . $i . "</option>";
@@ -757,7 +751,7 @@ if (
                         <div class="form-group col-md-3">
                             <label>Okmányok jellege<span class="req">*</span></label>
                             <select id="documents" class="form-control" name="documents" required>
-                                <option selected value='<?php echo $documents; ?>'><?php echo $documents; ?></option>
+                                <option selected value='<?php echo htmlspecialchars($documents); ?>'><?php echo htmlspecialchars($documents); ?></option>
                                 <option value="Magyar okmányokkal">Magyar okmányokkal</option>
                                 <option value="Külföldi okmányokkal">Külföldi okmányokkal</option>
                                 <option value="Okmányok nélkül">Okmányok nélkül</option>
@@ -766,7 +760,7 @@ if (
                         <div class="form-group col-md-3">
                             <label>Okmányok érvényessége<span class="req">*</span></label>
                             <select id="documentsvalidity" class="form-control" name="documentsvalidity" required>
-                                <option selected value='<?php echo $documentsvalidity; ?>'><?php echo $documentsvalidity; ?></option>
+                                <option selected value='<?php echo htmlspecialchars($documentsvalidity); ?>'><?php echo htmlspecialchars($documentsvalidity); ?></option>
                                 <option value="Érvényes okmányokkal">Érvényes okmányokkal</option>
                                 <option value="Lejárt okmányokkal">Lejárt okmányokkal</option>
                                 <option value="Forgalomból ideiglenesen kivont">Forgalomból ideiglenesen kivont</option>
@@ -775,13 +769,13 @@ if (
                         </div>
                         <div class="form-group col-md-3">
                             <label for="km">Kilométeróra állása<span class="req">*</span></label>
-                            <input class="form-control" id="kilometers" type="number" name="kilometers" value="<?php echo $kilometers; ?>" required>
+                            <input class="form-control" id="kilometers" type="number" name="kilometers" value="<?php echo htmlspecialchars($kilometers); ?>" required>
                             <span class="unit">km</span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="hours">Üzemóra</label>
                             <input class="form-control" id="hours" type="number" name="operatingtime" value="<?php if (!empty($operatingtime)) {
-                                                                                                                    echo $operatingtime;
+                                                                                                                    echo htmlspecialchars($operatingtime);
                                                                                                                 } ?>">
                             <span class="unit">óra</span>
                         </div>
@@ -790,7 +784,7 @@ if (
                             <select id="license-year" class="form-control" name="motyear">
                                 <?php
                                 if (!empty($motyear)) {
-                                    echo "<option selected value='" . $motyear . "'> " . $motyear . "</option>";
+                                    echo "<option selected value='" . htmlspecialchars($motyear) . "'> " . htmlspecialchars($motyear) . "</option>";
                                 } else {
                                     echo '<option value="" selected>Év</option>';
                                 }
@@ -805,7 +799,7 @@ if (
                             <select id="license-month" class="form-control" name="motmonth">
                                 <?php
                                 if (!empty($motmonth)) {
-                                    echo "<option selected value='" . $motmonth . "'> " . $motmonth . "</option>";
+                                    echo "<option selected value='" . htmlspecialchars($motmonth) . "'> " . htmlspecialchars($motmonth) . "</option>";
                                 } else {
                                     echo '<option value="" selected>Hó</option>';
                                 }
@@ -820,12 +814,12 @@ if (
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="hours">Hengerűrtartalom</label>
-                            <input class="form-control" id="ccm" type="number" name="capacity" value="<?php echo $capacity; ?>" required>
+                            <input class="form-control" id="ccm" type="number" name="capacity" value="<?php echo htmlspecialchars($capacity); ?>" required>
                             <span class="unit">cm³</span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="hours">Teljesítmény<span class="req">*</span></label>
-                            <input class="form-control" id="kw" type="number" name="performance" value="<?php echo $performance; ?>" required>
+                            <input class="form-control" id="kw" type="number" name="performance" value="<?php echo htmlspecialchars($performance); ?>" required>
                             <span class="unit">kW</span>
                         </div>
                         <div class="form-group col-md-3">
@@ -833,7 +827,7 @@ if (
                             <select id="stroke" class="form-control" name="enginetype">
                                 <?php
                                 if (!empty($enginetype)) {
-                                    echo "<option selected value='" . $enginetype . "'> " . $enginetype . "</option>";
+                                    echo "<option selected value='" . htmlspecialchars($enginetype) . "'> " . htmlspecialchars($enginetype) . "</option>";
                                 } else {
                                     echo '<option value="" selected>Kérjük válasszon</option>';
                                 }
@@ -847,7 +841,7 @@ if (
                             <select id="fuel" class="form-control" name="fuel">
                                 <?php
                                 if (!empty($fuel)) {
-                                    echo "<option selected value='" . $fuel . "'> " . $fuel . "</option>";
+                                    echo "<option selected value='" . htmlspecialchars($fuel) . "'> " . htmlspecialchars($fuel) . "</option>";
                                 } else {
                                     echo '<option value="" selected>Kérjük válasszon</option>';
                                 }
@@ -859,14 +853,14 @@ if (
                         </div>
                         <div class="form-group col-md-3">
                             <label for="color">Szín</label>
-                            <input class="form-control" id="color" type="text" name="color" value="<?php echo $color; ?>">
+                            <input class="form-control" id="color" type="text" name="color" value="<?php echo htmlspecialchars($color); ?>">
                         </div>
                         <div class="form-group col-md-3">
                             <label>Állapot</label>
                             <select id="condition" class="form-control" name="cond">
                                 <?php
                                 if (!empty($cond)) {
-                                    echo "<option selected value='" . $cond . "'> " . $cond . "</option>";
+                                    echo "<option selected value='" . htmlspecialchars($cond) . "'> " . htmlspecialchars($cond) . "</option>";
                                 } else {
                                     echo '<option value="" selected>Kérjük válasszon</option>';
                                 }
@@ -883,7 +877,7 @@ if (
                         <div class="form-group col-md-3">
                             <label>Jogosítvány típusa<span class="req">*</span></label>
                             <select id="driver-license" class="form-control" name="license" required>
-                                <option selected value='<?php echo $license; ?>'><?php echo $license; ?></option>
+                                <option selected value='<?php echo htmlspecialchars($license); ?>'><?php echo htmlspecialchars($license); ?></option>
                                 <option value="AM">AM</option>
                                 <option value="A1">A1</option>
                                 <option value="A2">A2</option>
@@ -893,7 +887,7 @@ if (
                     </div>
                     <div class="form-group">
                         <label for="description">Leírás</label>
-                        <textarea class="form-control" id="description" rows="6" name="description" maxlength="1000"><?php echo $description; ?></textarea>
+                        <textarea class="form-control" id="description" rows="6" name="description" maxlength="1000"><?php echo htmlspecialchars($description); ?></textarea>
                         <div id="characters-left"></div>
                     </div>
 
@@ -922,8 +916,8 @@ if (
                                     $is_checked = in_array($row['id'], $technical_selected_arr) ? "checked" : "";
 
                                     echo "<div class='form-check'>";
-                                    echo "<input type='checkbox' class='form-check-input' name='technical[" . $row['id'] . "]' id='technical-" . $row['id'] . "' value='1'" . $is_checked . ">";
-                                    echo "<label class='form-check-label' for='technical-" . $row['id'] . "'>" . $row['name'] . "</label>";
+                                    echo "<input type='checkbox' class='form-check-input' name='technical[" . htmlspecialchars($row['id']) . "]' id='technical-" . htmlspecialchars($row['id']) . "' value='1'" . htmlspecialchars($is_checked) . ">";
+                                    echo "<label class='form-check-label' for='technical-" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['name']) . "</label>";
                                     echo "</div>";
                                 }
                             } else {
@@ -954,8 +948,8 @@ if (
                                     $is_checked = in_array($row['id'], $comfort_selected_arr) ? "checked" : "";
 
                                     echo "<div class='form-check'>";
-                                    echo "<input type='checkbox' class='form-check-input' name='comfort[" . $row['id'] . "]' id='comfort-" . $row['id'] . "' value='1'" . $is_checked . ">";
-                                    echo "<label class='form-check-label' for='comfort-" . $row['id'] . "'>" . $row['name'] . "</label>";
+                                    echo "<input type='checkbox' class='form-check-input' name='comfort[" . htmlspecialchars($row['id']) . "]' id='comfort-" . htmlspecialchars($row['id']) . "' value='1'" . htmlspecialchars($is_checked) . ">";
+                                    echo "<label class='form-check-label' for='comfort-" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['name']) . "</label>";
                                     echo "</div>";
                                 }
                             } else {
@@ -986,8 +980,8 @@ if (
                                     $is_checked = in_array($row['id'], $safety_selected_arr) ? "checked" : "";
 
                                     echo "<div class='form-check'>";
-                                    echo "<input type='checkbox' class='form-check-input' name='safety[" . $row['id'] . "]' id='safety-" . $row['id'] . "' value='1'" . $is_checked . ">";
-                                    echo "<label class='form-check-label' for='safety-" . $row['id'] . "'>" . $row['name'] . "</label>";
+                                    echo "<input type='checkbox' class='form-check-input' name='safety[" . htmlspecialchars($row['id']) . "]' id='safety-" . htmlspecialchars($row['id']) . "' value='1'" . htmlspecialchars($is_checked) . ">";
+                                    echo "<label class='form-check-label' for='safety-" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['name']) . "</label>";
                                     echo "</div>";
                                 }
                             } else {
@@ -1002,31 +996,31 @@ if (
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="advertiser-name">Név<span class="req">*</span></label>
-                            <input class="form-control" id="advertiser-name" type="text" name="name" value="<?php echo $name; ?>" required>
+                            <input class="form-control" id="advertiser-name" type="text" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="advertiser-email">E-mail cím</label>
-                            <input class="form-control" id="advertiser-email" type="email" name="email" value="<?php echo $email; ?>">
+                            <input class="form-control" id="advertiser-email" type="email" name="email" value="<?php echo htmlspecialchars($email); ?>">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="tel-number">Telefonszám<span class="req">*</span></label>
-                            <input class="form-control" id="tel-number" type="number" name="phone" value="<?php echo $phone; ?>" required>
+                            <input class="form-control" id="tel-number" type="number" name="phone" value="<?php echo htmlspecialchars($phone); ?>" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="tel-number2">2. Telefonszám</label>
-                            <input class="form-control" id="tel-number2" type="number" name="phone2" value="<?php echo $phone2; ?>">
+                            <input class="form-control" id="tel-number2" type="number" name="phone2" value="<?php echo htmlspecialchars($phone2); ?>">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label>Megye<span class="req">*</span></label>
                             <select id="county" class="form-control" name="county" required>
-                                <option selected value='<?php echo $county; ?>'><?php echo $county; ?></option>
+                                <option selected value='<?php echo htmlspecialchars($county); ?>'><?php echo htmlspecialchars($county); ?></option>
                                 <?php
                                 // Display counties
                                 if ($counties_result->num_rows > 0) {
                                     while ($row = $counties_result->fetch_assoc()) {
-                                        echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                                        echo "<option value='" . htmlspecialchars($row['name']) . "'>" . htmlspecialchars($row['name']) . "</option>";
                                     }
                                 } else {
                                     echo 'Nincs elérhető megye!';
@@ -1036,7 +1030,7 @@ if (
                         </div>
                         <div class="form-group col-md-3">
                             <label for="settlement">Település<span class="req">*</span></label>
-                            <input class="form-control" id="settlement" type="text" name="settlement" value="<?php echo $settlement; ?>" required>
+                            <input class="form-control" id="settlement" type="text" name="settlement" value="<?php echo htmlspecialchars($settlement); ?>" required>
                         </div>
                     </div>
                     <h5 class="advertiser">Képek feltöltése</h5>
@@ -1052,7 +1046,7 @@ if (
             if ($errorMsg !== '') {
             ?>
                 <script>
-                    alertify.error(<?php echo ' " ' . $errorMsg . ' " '; ?>);
+                    alertify.error(<?php echo ' " ' . htmlspecialchars($errorMsg) . ' " '; ?>);
                 </script>
             <?php
             }
@@ -1105,9 +1099,9 @@ if (
     <!-- Image uploader -->
     <script>
         $('.input-images').imageUploader({
-            label: 'Kérjük húzzon ide további maximum <?php echo $moreImages ?> db, feltölteni kívánt képet.',
+            label: 'Kérjük húzzon ide további maximum <?php echo htmlspecialchars($moreImages) ?> db, feltölteni kívánt képet.',
             maxSize: 2 * 1024 * 1024,
-            maxFiles: <?php echo $moreImages ?>,
+            maxFiles: <?php echo htmlspecialchars($moreImages) ?>,
             imagesInputName: 'files'
         });
     </script>

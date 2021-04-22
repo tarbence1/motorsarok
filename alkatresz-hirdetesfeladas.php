@@ -171,7 +171,7 @@ if ($counted >= $maxAds) {
                 <h2 class="display-6">Alkatrész hirdetésfeladás</h2>
                 <ul class="fa-ul">
                     <?php
-                    echo $maxAdsInfo;
+                    echo htmlspecialchars($maxAdsInfo);
                     ?>
                 </ul>
                 <h5 class="data">Képek feltöltése</h5>
@@ -179,10 +179,10 @@ if ($counted >= $maxAds) {
                 <ul class="fa-ul">
                     <?php
                     if (empty($premiumInfo)) {
-                        echo '<li><span class="fa-li"><i class="fas fa-info-circle"></i></span>Ön jelenleg <b>nem</b> rendelkezik prémium csomaggal, így maximum <b>' . $maxImage . '</b> képet tölhet fel.</li>';
+                        echo '<li><span class="fa-li"><i class="fas fa-info-circle"></i></span>Ön jelenleg <b>nem</b> rendelkezik prémium csomaggal, így maximum <b>' . htmlspecialchars($maxImage) . '</b> képet tölhet fel.</li>';
                         echo '<li><span class="fa-li"><i class="fas fa-info-circle"></i></span>Amennyiben szeretne a csomagok közül választani, <b><a href="profile.php">ide</a></b> kattintva választhat egyet.</li>';
                     } else {
-                        echo '<li><span class="fa-li"><i class="fas fa-info-circle"></i></span>Ön jelenleg <b><span id="' . $premiumColor . '">' . $premiumInfo . '</span></b> csomaggal rendelkezik, így maximum <b>' . $maxImage . '</b> képet tölthet fel.</li>';
+                        echo '<li><span class="fa-li"><i class="fas fa-info-circle"></i></span>Ön jelenleg <b><span id="' . htmlspecialchars($premiumColor) . '">' . htmlspecialchars($premiumInfo) . '</span></b> csomaggal rendelkezik, így maximum <b>' . htmlspecialchars($maxImage) . '</b> képet tölthet fel.</li>';
                     }
                     ?>
                     <li>
@@ -256,7 +256,7 @@ if ($counted >= $maxAds) {
                             // Display counties
                             if ($counties_result->num_rows > 0) {
                                 while ($row = $counties_result->fetch_assoc()) {
-                                    echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                                    echo "<option value='" . htmlspecialchars($row['name']) . "'>" . htmlspecialchars($row['name']) . "</option>";
                                 }
                             } else {
                                 echo 'Nincs elérhető megye!';
@@ -322,7 +322,7 @@ if ($counted >= $maxAds) {
             paramName: "images", // The name that will be used to transfer the file
             parallelUploads: 12,
             maxFilesize: 2, // MB
-            maxFiles: <?php echo $maxImage ?>,
+            maxFiles: <?php echo htmlspecialchars($maxImage) ?>,
             addRemoveLinks: true,
             acceptedFiles: 'image/*',
             dictDefaultMessage: '<i class="fas fa-cloud-upload-alt"></i><br/>Kérjük húzza ide a képeket vagy kattintson a tallózáshoz!<br/><b>Legalább egy kép feltöltése kötelező!</b>',

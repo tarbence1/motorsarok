@@ -39,8 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else {
                     $username = trim($_POST["username"]);
                 }
-            } else {
-                echo "";
             }
         }
 

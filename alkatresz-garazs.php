@@ -78,7 +78,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav nav-justified w-100 text-center">
                         <li class="nav-item">
-                            <a href="alkatreszek.php" class="nav-link d-flex flex-column">
+                            <a href="index.php" class="nav-link d-flex flex-column">
                                 <i class="fas fa-motorcycle fa-lg"></i>
                                 <span class="d-sm-inline mt-1">motorkerékpárok</span>
                             </a>
@@ -136,7 +136,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
             ?>
 
-                    <a href="#" data-toggle="modal" data-target="#modal-<?php echo $row['id']; ?>">
+                    <a href="#" data-toggle="modal" data-target="#modal-<?php echo htmlspecialchars($row['id']); ?>">
                         <div class="card" id="motor-cards">
                             <?php
                             // Walk around the image array
@@ -148,19 +148,19 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                 }
                                 $i++;
                             }
-                            echo "<img src='" . $mainimage . "' class='card-img-top' alt='Main Image'/>";
+                            echo "<img src='" . htmlspecialchars($mainimage) . "' class='card-img-top' alt='Main Image'/>";
                             ?>
 
                             <div class="card-body">
                                 <div class="short-data">
-                                    <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $row['price']; ?> Ft</h6>
+                                    <h5 class="card-title"><?php echo htmlspecialchars($row['product_name']); ?></h5>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo htmlspecialchars($row['price']); ?> Ft</h6>
                                 </div>
 
                                 <form action="alkatresz-garazs.php" method="POST" onsubmit="return confirm('Biztosan el szeretné távolítani a garázsból?');">
-                                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-<?php echo $row['id']; ?>">Részletek</a>
+                                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-<?php echo htmlspecialchars($row['id']); ?>">Részletek</a>
                                     <div class="float-right">
-                                        <input type="hidden" value="<?php echo $row['id']; ?>" name="advert-id">
+                                        <input type="hidden" value="<?php echo htmlspecialchars($row['id']); ?>" name="advert-id">
                                         <input type='submit' value="Eltávolítás" name="remove" id="btn-delete" />
                                     </div>
                                 </form>
@@ -170,16 +170,16 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
                     <!-- Details Modal -->
 
-                    <div class="modal full" id="modal-<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+                    <div class="modal full" id="modal-<?php echo htmlspecialchars($row['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
                         <div class="modal-dialog-full-width modal-dialog momodel modal-fluid" role="document" id="modalFull">
                             <div class="modal-content-full-width modal-content ">
                                 <div class=" modal-header-full-width   modal-header text-center">
-                                    <h5 class="modal-title w-100" id="detailsModalLabel"><?php echo $row['product_name']; ?></h5>
+                                    <h5 class="modal-title w-100" id="detailsModalLabel"><?php echo htmlspecialchars($row['product_name']); ?></h5>
                                     <button type="button" class="close " data-dismiss="modal" aria-label="Bezárás">
                                         <span style="font-size: 1.3em;" aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div id="imageGallery<?php echo $row['id']; ?>" class="carousel slide" data-ride="carousel">
+                                <div id="imageGallery<?php echo htmlspecialchars($row['id']); ?>" class="carousel slide" data-ride="carousel">
 
                                     <!-- Indicators -->
                                     <ul class="carousel-indicators">
@@ -191,7 +191,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                                 $actives = 'active';
                                             }
                                         ?>
-                                            <li data-target="#imageGallery<?php echo $row['id']; ?>" data-slide-to="<?php echo $i; ?>" class="<?php echo $actives; ?>"></li>
+                                            <li data-target="#imageGallery<?php echo htmlspecialchars($row['id']); ?>" data-slide-to="<?php echo $i; ?>" class="<?php echo $actives; ?>"></li>
                                         <?php
                                             $i++;
                                         }
@@ -212,7 +212,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
                                         ?>
                                             <div class="carousel-item <?php echo $actives ?>">
-                                                <a href="#imagemodal-<?php echo $rec['id'] ?>" data-toggle="modal" data-target="#imagemodal-<?php echo $rec['id'] ?>">
+                                                <a href="#imagemodal-<?php echo htmlspecialchars($rec['id']) ?>" data-toggle="modal" data-target="#imagemodal-<?php echo htmlspecialchars($rec['id']) ?>">
                                                     <img src="<?php echo $image ?>" class="img-fluid" id="thumbnailimage">
                                                 </a>
                                             </div>
@@ -220,9 +220,9 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
                                             <!-- Thumbnail image modal -->
                                             <div class="modal-wrapper" style="z-index: 999999;">
-                                                <div id="imagemodal-<?php echo $rec['id'] ?>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div id="imagemodal-<?php echo htmlspecialchars($rec['id']) ?>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" id="centered">
-                                                        <img src="<?php echo $image ?>" id="galleryImage" class="img-thumbnail">
+                                                        <img src="<?php echo htmlspecialchars($image) ?>" id="galleryImage" class="img-thumbnail">
                                                     </div>
                                                 </div>
                                             </div>
@@ -234,10 +234,10 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                     </div>
 
                                     <!-- Left and right controls -->
-                                    <a class="carousel-control-prev" href="#imageGallery<?php echo $row['id']; ?>" data-slide="prev">
+                                    <a class="carousel-control-prev" href="#imageGallery<?php echo htmlspecialchars($row['id']); ?>" data-slide="prev">
                                         <span class="carousel-control-prev-icon"></span>
                                     </a>
-                                    <a class="carousel-control-next" href="#imageGallery<?php echo $row['id']; ?>" data-slide="next">
+                                    <a class="carousel-control-next" href="#imageGallery<?php echo htmlspecialchars($row['id']); ?>" data-slide="next">
                                         <span class="carousel-control-next-icon"></span>
                                     </a>
 
@@ -249,7 +249,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                         <?php if (!empty($row['description'])) {
                                             echo '<h5 id="description">Leírás</h5><hr>
                                             <div id="description-text">'
-                                                . $row["description"] .
+                                                . htmlspecialchars($row["description"]) .
                                                 '</div>';
                                         }
                                         ?>
@@ -260,16 +260,16 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                             </tr>
                                             <tr>
                                                 <td><i class="fas fa-tools"><span style="padding-left: 10px;">Megnevezés:</span></i></td>
-                                                <td><?php echo $row['product_name']; ?></td>
+                                                <td><?php echo htmlspecialchars($row['product_name']); ?></td>
                                             </tr>
                                             <tr>
                                                 <td><i class="fas fa-money-bill-wave"><span style="padding-left: 10px;">Vételár:</span></i></td>
-                                                <td><?php echo $row['price']; ?> Ft</td>
+                                                <td><?php echo htmlspecialchars($row['price']); ?> Ft</td>
                                             </tr>
                                             <?php if (!empty($row['motorcycle_type'])) {
                                                 echo '<tr>
                                                         <td><i class="fas fa-motorcycle"><span style="padding-left: 10px;">Kompatibilis:</span></i></td>
-                                                        <td>' . $row['motorcycle_type'] .  '</td> 
+                                                        <td>' . htmlspecialchars($row['motorcycle_type']) .  '</td> 
                                                         </tr>';
                                             }
                                             ?>
@@ -280,24 +280,24 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
                                             <tr>
                                                 <td><i class="fas fa-user"><span style="padding-left: 10px;">Név:</span></i></td>
-                                                <td><?php echo $row['name']; ?></td>
+                                                <td><?php echo htmlspecialchars($row['name']); ?></td>
                                             </tr>
                                             <?php if (!empty($row['email'])) {
                                                 echo '<tr>
                                                         <td><i class="fas fa-at"><span style="padding-left: 10px;">Email cím:</span></i></td>
-                                                        <td><a href="mailto:' . $row['email'] . '">' . $row["email"] .  '</td>
+                                                        <td><a href="mailto:' . htmlspecialchars($row['email']) . '">' . htmlspecialchars($row["email"]) .  '</td>
                                                         </tr>';
                                             }
                                             ?>
 
                                             <tr>
                                                 <td><i class="fas fa-mobile-alt"><span style="padding-left: 10px;">Telefonszám:</span></i></td>
-                                                <td><a href="tel:<?php echo $row['phone']; ?>"><?php echo $row['phone']; ?></a></td>
+                                                <td><a href="tel:<?php echo htmlspecialchars($row['phone']); ?>"><?php echo htmlspecialchars($row['phone']); ?></a></td>
                                             </tr>
                                             <?php if (!empty($row['phone2'])) {
                                                 echo '<tr>
                                                         <td><i class="fas fa-phone-volume"><span style="padding-left: 10px;">Másodlagos telefonszám:</span></i></td>
-                                                        <td><a href="tel:' . $row['phone2'] . '">' . $row["phone2"] .  '</td> 
+                                                        <td><a href="tel:' . htmlspecialchars($row['phone2']) . '">' . htmlspecialchars($row["phone2"]) .  '</td> 
                                                         </tr>';
                                             }
                                             ?>
@@ -310,7 +310,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                                         $county = ' megye';
                                                     }
 
-                                                    echo $row['settlement'] . ', ' . $row['county'] . $county; ?>
+                                                    echo htmlspecialchars($row['settlement']) . ', ' . htmlspecialchars($row['county']) . $county; ?>
                                                 </td>
 
                                             </tr>
@@ -340,53 +340,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         <?php
             unset($_SESSION['successad']);
         }
-        ?>
 
-
-
-
-        <?php include('footer.php'); ?>
-    </div>
-
-    <a href="#" id="scroll" style="display: none;"><span></span></a>
-
-
-
-
-    <!-- Footer Links -->
-    <div class="footer-linkek">
-        <div class="container text-center text-md-left mt-5">
-            <div class="row mt-3">
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                    <h6 class="text-uppercase font-weight-bold">Hasznos linkek</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 140px;">
-                    <p>
-                        <a href="https://nemzetiutdij.hu/files/img/articles/295/1.%20sz._mell%C3%A9klet_Kib%C5%91v%C3%ADtett_ad%C3%A1s-v%C3%A9teli_minta.pdf">Adásvételi szerződés letöltése</a>
-                    </p>
-                    <p>
-                        <a href="https://motorjogositvany.com/kategoria" target="_blank">Jogosítvány típusok</a>
-                    </p>
-                </div>
-
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <h6 class="text-uppercase font-weight-bold">Kapcsolat</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                    <p>
-                        <i class="fas fa-home mr-3"></i>2152, XY, Alma utca 4/B
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope mr-3"></i> valami@example.com
-                    </p>
-                    <p>
-                        <i class="fas fa-phone mr-3"></i> + 36 30 425 525
-                    </p>
-                    <p>
-                        <i class="fas fa-print mr-3"></i> + 36 20 245 89
-                    </p>
-                </div>
-            </div>
-        </div>
+        include('footer.php'); ?>
     </div>
 
     <div class="footer-copyright text-center py-3">

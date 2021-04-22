@@ -619,7 +619,7 @@ if ($counted >= $maxAds) {
                 }
             },
             successmultiple: function(file, response) {
-                //return window.location.replace('hirdeteseim.php');
+                return window.location.replace('hirdeteseim.php');
             },
             init: function() {
                 dzClosure = this;
