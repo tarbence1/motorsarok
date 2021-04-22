@@ -11,7 +11,7 @@ $noAd = false;
 if (isset($_GET['results'])) {
     $results_per_page = $_GET['results'];
 } else {
-    $results_per_page = 10;
+    $results_per_page = 25;
 }
 
 // How many page buttons to show
@@ -200,8 +200,7 @@ $stmt->bind_param("i", $productid);
                             <label>Találatok (db/oldal)</label>
                         </div>
                         <select class="form-control col-8 mx-auto" id="results" name="results">
-                            <option value="10" <?php if (isset($_GET['results']) && $_GET['results'] == '10' || !isset($_GET['results'])) echo 'selected'; ?>>10</option>
-                            <option value="25" <?php if (isset($_GET['results']) && $_GET['results'] == '25') echo 'selected'; ?>>25</option>
+                            <option value="25" <?php if (isset($_GET['results']) && $_GET['results'] == '25' || !isset($_GET['results'])) echo 'selected'; ?>>25</option>
                             <option value="50" <?php if (isset($_GET['results']) && $_GET['results'] == '50') echo 'selected'; ?>>50</option>
                             <option value="100" <?php if (isset($_GET['results']) && $_GET['results'] == '100') echo 'selected'; ?>>100</option>
                         </select>

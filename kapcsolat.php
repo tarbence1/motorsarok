@@ -104,7 +104,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message']) 
 
 <body>
 
-    <button onclick="topFunction()" id="go-to-top"><i class="fas fa-arrow-up"></i></button>
+    <button id="go-to-top"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Page Content  -->
     <div id="content">

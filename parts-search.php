@@ -100,7 +100,7 @@ if (
                 break;
         }
     } else {
-        $results_per_page = 10;
+        $results_per_page = 25;
     }
 
     // Set the number of pages

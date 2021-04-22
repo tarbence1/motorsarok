@@ -21,7 +21,6 @@ function showPosition(position) {
         "https://api.bigdatacloud.net/data/reverse-geocode-client?";
 
     bigdatacloud_api += query;
-    console.log(bigdatacloud_api);
 
     Http.open("GET", bigdatacloud_api);
     Http.send();
@@ -29,7 +28,6 @@ function showPosition(position) {
     Http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var myObj = JSON.parse(this.responseText);
-            console.log(myObj);
             y.innerHTML = myObj.locality;
             loc = myObj.locality;
 
@@ -47,7 +45,6 @@ if (localStorage.getItem("loc")) {
     localStorage.removeItem("loc2");
     // json to object
     var loc = JSON.parse(localStorage.getItem("loc"));
-    console.log(loc);
     document.querySelector("#json").innerHTML = `${loc.locality}`;
     document.querySelector("#currentLocation").innerHTML = loc.locality;
 }

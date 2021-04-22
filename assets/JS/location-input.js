@@ -14,7 +14,6 @@ function saveLocation() {
 
 if (localStorage.getItem("loc2")) {
     var retrievedObject = JSON.parse(localStorage.getItem("loc2"));
-    console.log(retrievedObject);
     document.querySelector("#json").innerText = `${retrievedObject.town}`;
     document.querySelector("#currentLocation").innerText = retrievedObject.town;
 }

@@ -384,8 +384,7 @@
     let refresh = function() {
         var fi = $("input[type=file]")[0];
         if (($(".uploaded-image").length > 0) && ($(".main").length == 0)) {
-            console.log("in")
-                //add class to first one
+            //add class to first one
             $(".uploaded-image:first").addClass("main")
             $("#mainimage").val(fi.files.item(0).name) //add default name to imgs input
         }
