@@ -57,7 +57,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message']) 
             }
         }
     } else {
-        $message_error = "A Google reCAPTCHA hibát észlelt, kérjük próbálja meg később!";
+        $message_error = "A Google reCAPTCHA hibát észlelt, kérjük próbálja meg újra!";
     }
 }
 

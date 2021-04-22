@@ -12,88 +12,105 @@ if (isset($_SESSION["loggedin"])) {
 
 // Define variables and initialize with empty values
 $username = $password = "";
-$username_err = $password_err = "";
+$username_err = $password_err = $recaptcha_err = "";
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["recaptcha_response"])) {
 
-    // Check if username is empty
-    if (empty(trim($_POST["username"]))) {
-        $username_err = "Kérem adja meg a felhasználónevét/Email címét.";
-    } else {
-        $email = trim($_POST["username"]);
-        $username = trim($_POST["username"]);
-    }
+    // Create POST request to send to Google
+    $recaptcha_url = "https://www.google.com/recaptcha/api/siteverify";
+    $recaptcha_secret = "6LcyIbMaAAAAAJmg94kSxlowWY_JZ-1e1505aw5z";
+    $recaptcha_response = $_POST["recaptcha_response"];
 
-    // Check if password is empty
-    if (empty(trim($_POST["password"]))) {
-        $password_err = "Kérem adja meg a jelszavát.";
-    } else {
-        $password = trim($_POST["password"]);
-    }
+    // Send POST request
+    $recaptcha = file_get_contents($recaptcha_url . "?secret=" . $recaptcha_secret . "&response=" . $recaptcha_response);
 
-    // Validate credentials
-    if (empty($username_err) && empty($password_err)) {
-        // Prepare a select statement
-        $sql = "SELECT id, username, email, password, is_admin FROM users WHERE email = ? OR username = ? ";
+    // Decode response
+    $recaptcha = json_decode($recaptcha);
 
+    // Check if verified
+    if ($recaptcha->success && $recaptcha->score >= 0.5) {
 
-        if ($stmt = mysqli_prepare($link, $sql)) {
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_email, $param_username);
-
-            // Set parameters
-            $param_email = $email;
-            $param_username = $username;
-
-
-
-            // Attempt to execute the prepared statement
-            if (mysqli_stmt_execute($stmt)) {
-                // Store result
-                mysqli_stmt_store_result($stmt);
-
-                // Check if username exists, if yes then verify password
-                if (mysqli_stmt_num_rows($stmt) == 1) {
-                    // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username,  $email, $hashed_password, $is_admin);
-                    if (mysqli_stmt_fetch($stmt)) {
-                        if (password_verify($password, $hashed_password)) {
-                            // Password is correct, so start a new session
-
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;
-                            $_SESSION["is_admin"] = $is_admin;
-
-
-
-                            // Redirect user to the stored page
-                            if (array_key_exists('url', $_SESSION)) {
-                                header('Location: ' . $_SESSION['url']);
-                                unset($_SESSION['url']);
-                            } else {
-                                header('Location: index.php');
-                            }
-                        } else {
-                            // Display an error message if password is not valid
-                            $password_err = "A megadott jelszó nem megfelelő.";
-                        }
-                    }
-                } else {
-                    // Display an error message if username doesn't exist
-                    $username_err = "Érvénytelen felhasználónév/Email cím.";
-                }
-            }
+        // Check if username is empty
+        if (empty(trim($_POST["username"]))) {
+            $username_err = "Kérem adja meg a felhasználónevét/Email címét.";
+        } else {
+            $email = trim($_POST["username"]);
+            $username = trim($_POST["username"]);
         }
 
-        // Close statement
-        mysqli_stmt_close($stmt);
-    }
+        // Check if password is empty
+        if (empty(trim($_POST["password"]))) {
+            $password_err = "Kérem adja meg a jelszavát.";
+        } else {
+            $password = trim($_POST["password"]);
+        }
 
-    // Close connection
-    mysqli_close($link);
+        // Validate credentials
+        if (empty($username_err) && empty($password_err)) {
+            // Prepare a select statement
+            $sql = "SELECT id, username, email, password, is_admin FROM users WHERE email = ? OR username = ? ";
+
+
+            if ($stmt = mysqli_prepare($link, $sql)) {
+                // Bind variables to the prepared statement as parameters
+                mysqli_stmt_bind_param($stmt, "ss", $param_email, $param_username);
+
+                // Set parameters
+                $param_email = $email;
+                $param_username = $username;
+
+
+
+                // Attempt to execute the prepared statement
+                if (mysqli_stmt_execute($stmt)) {
+                    // Store result
+                    mysqli_stmt_store_result($stmt);
+
+                    // Check if username exists, if yes then verify password
+                    if (mysqli_stmt_num_rows($stmt) == 1) {
+                        // Bind result variables
+                        mysqli_stmt_bind_result($stmt, $id, $username,  $email, $hashed_password, $is_admin);
+                        if (mysqli_stmt_fetch($stmt)) {
+                            if (password_verify($password, $hashed_password)) {
+                                // Password is correct, so start a new session
+
+                                // Store data in session variables
+                                $_SESSION["loggedin"] = true;
+                                $_SESSION["id"] = $id;
+                                $_SESSION["username"] = $username;
+                                $_SESSION["is_admin"] = $is_admin;
+
+
+
+                                // Redirect user to the stored page
+                                if (array_key_exists('url', $_SESSION)) {
+                                    header('Location: ' . $_SESSION['url']);
+                                    unset($_SESSION['url']);
+                                } else {
+                                    header('Location: index.php');
+                                }
+                            } else {
+                                // Display an error message if password is not valid
+                                $password_err = "A megadott jelszó nem megfelelő.";
+                            }
+                        }
+                    } else {
+                        // Display an error message if username doesn't exist
+                        $username_err = "Érvénytelen felhasználónév/Email cím.";
+                    }
+                }
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+
+        // Close connection
+        mysqli_close($link);
+    } else {
+        $recaptcha_err = "A Google reCAPTCHA hibát észlelt, kérjük próbálja meg újra!";
+    }
 }
 ?>
 
@@ -120,6 +137,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="assets/CSS/default.min.css">
     <!-- Alertify JS -->
     <script src="assets/JS/alertify.js"></script>
+    <!-- reCAPTCHA JS -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcyIbMaAAAAAMS8-tDa_NXYWljy7VawX6Hhlp34"></script>
+    <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LcyIbMaAAAAAMS8-tDa_NXYWljy7VawX6Hhlp34', {
+                action: 'submit'
+            }).then(function(token) {
+                let recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
 
 </head>
 
@@ -176,7 +205,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <span toggle="#password-field" class="fas fa-lock field-icon toggle-password input-group-text" id="show-password"></span>
                             </div>
                             <span class="help-block" style="color: red;"><?php echo $password_err; ?></span>
+                            <span class="help-block" style="color: red;"><?php echo $recaptcha_err; ?></span>
                         </div>
+                        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                         <div class="d-flex justify-content-center mt-3 login_container">
                             <input type="submit" class="btn btn-primary" id="login-button" value="Bejelentkezés" style="background: #ee4a4a; border-color: #ee4a4a;">
                         </div>
