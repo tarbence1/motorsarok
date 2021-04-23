@@ -782,6 +782,8 @@ $stmt->bind_param("i", $productid);
     <script src="assets/JS/modal-link.js"></script>
     <!-- Hide modal link from search bar -->
     <script src="assets/JS/hide-modal-link.js"></script>
+    <!-- AJAX Garage -->
+    <script src="assets/JS/parts-to-garage.js"></script>
 
     <!-- Sidebar -->
     <script>
@@ -800,53 +802,6 @@ $stmt->bind_param("i", $productid);
                 $('.overlay').addClass('active');
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
-        });
-    </script>
-
-    <!-- AJAX Garage -->
-    <script>
-        //From card to garage
-        $(document).ready(function() {
-            //form when submit
-            $("form[id*=upload-to-garage]").submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: "upload-to-parts-garage.php",
-                    method: "post",
-                    data: $(this).serialize() + "&garage=somevalue",
-                    dataType: "text",
-                    success: function(response) {
-                        var errorMessages = JSON.parse(response);
-                        if (errorMessages.ok) {
-                            alertify.success(errorMessages.errorMsg);
-                        } else {
-                            alertify.error(errorMessages.errorMsg);
-                        }
-                    }
-                });
-            });
-        });
-
-        //From modal to garage
-        $(document).ready(function() {
-            //form when submit
-            $("form[id*=modal-to-garage]").submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: "upload-to-parts-garage.php",
-                    method: "post",
-                    data: $(this).serialize() + "&garage=somevalue",
-                    dataType: "text",
-                    success: function(response) {
-                        var errorMessages = JSON.parse(response);
-                        if (errorMessages.ok) {
-                            alertify.success(errorMessages.errorMsg);
-                        } else {
-                            alertify.error(errorMessages.errorMsg);
-                        }
-                    }
-                });
             });
         });
     </script>

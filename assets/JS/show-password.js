@@ -1,5 +1,4 @@
-$(".toggle-password").click(function() {
-
+$(".toggle-password, .toggle-password2").click(function() {
     $(this).toggleClass("fa-lock-open");
     var input = $($(this).attr("toggle"));
     if (input.attr("type") == "password") {

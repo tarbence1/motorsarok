@@ -1020,7 +1020,32 @@ $safety_stmt->bind_param("i", $productid);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <!-- jQuery Custom Scrollbar -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
+    <!-- Jump to top -->
+    <script src="assets/JS/jump-to-top.js"></script>
+    <!-- Tooltips -->
+    <script src="assets/JS/tooltips.js"></script>
+    <!-- Location delete -->
+    <script src="assets/JS/location-delete.js"></script>
+    <!-- ZIP code finder -->
+    <script src="assets/JS/zipcode-finder.js"></script>
+    <!-- Location finder -->
+    <script src="assets/JS/location-finder.js"></script>
+    <!-- Save location from input -->
+    <script src="assets/JS/location-input.js"></script>
+    <!-- Start and End positions for routing -->
+    <script src="assets/JS/routing.js"></script>
+    <!-- Copy link -->
+    <script src="assets/JS/motorcycles-copy-link.js"></script>
+    <!-- Show modal from link -->
+    <script src="assets/JS/modal-display.js"></script>
+    <!-- Show modal link in search bar -->
+    <script src="assets/JS/modal-link.js"></script>
+    <!-- Hide modal link from search bar -->
+    <script src="assets/JS/hide-modal-link.js"></script>
+    <!-- AJAX Garage -->
+    <script src="assets/JS/to-garage.js"></script>
+    <!-- Cookie message -->
+    <script src="assets/JS/cookie-message.js"></script>
 
     <!-- Sidebar -->
     <script>
@@ -1045,116 +1070,6 @@ $safety_stmt->bind_param("i", $productid);
                 $("body").css("height", "100%");
             });
         });
-    </script>
-
-    <!-- Jump to top -->
-    <script src="assets/JS/jump-to-top.js"></script>
-    <!-- Tooltips -->
-    <script src="assets/JS/tooltips.js"></script>
-
-    <!-- Location delete -->
-    <script src="assets/JS/location-delete.js"></script>
-    <!-- ZIP code finder -->
-    <script src="assets/JS/zipcode-finder.js"></script>
-    <!-- Location finder -->
-    <script src="assets/JS/location-finder.js"></script>
-    <!-- Save location from input -->
-    <script src="assets/JS/location-input.js"></script>
-    <!-- Start and End positions for routing -->
-    <script src="assets/JS/routing.js"></script>
-    <!-- Copy link -->
-    <script src="assets/JS/motorcycles-copy-link.js"></script>
-    <!-- Show modal from link -->
-    <script src="assets/JS/modal-display.js"></script>
-    <!-- Show modal link in search bar -->
-    <script src="assets/JS/modal-link.js"></script>
-    <!-- Hide modal link from search bar -->
-    <script src="assets/JS/hide-modal-link.js"></script>
-
-    <!-- AJAX Garage -->
-    <script>
-        //From card to garage
-        $(document).ready(function() {
-            //form when submit
-            $("form[id*=upload-to-garage]").submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: "upload-to-garage.php",
-                    method: "post",
-                    data: $(this).serialize() + "&garage=somevalue",
-                    dataType: "text",
-                    success: function(response) {
-                        var errorMessages = JSON.parse(response);
-                        if (errorMessages.ok) {
-                            alertify.success(errorMessages.errorMsg);
-                        } else {
-                            alertify.error(errorMessages.errorMsg);
-                        }
-                    }
-                });
-            });
-        });
-
-        //From modal to garage
-        $(document).ready(function() {
-            //form when submit
-            $("form[id*=modal-to-garage]").submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: "upload-to-garage.php",
-                    method: "post",
-                    data: $(this).serialize() + "&garage=somevalue",
-                    dataType: "text",
-                    success: function(response) {
-                        var errorMessages = JSON.parse(response);
-                        if (errorMessages.ok) {
-                            alertify.success(errorMessages.errorMsg);
-                        } else {
-                            alertify.error(errorMessages.errorMsg);
-                        }
-                    }
-                });
-            });
-        });
-    </script>
-
-    <script>
-        const cookieStorage = {
-            getItem: (item) => {
-                const cookies = document.cookie
-                    .split(';')
-                    .map(cookie => cookie.split('='))
-                    .reduce((acc, [key, value]) => ({
-                        ...acc,
-                        [key.trim()]: value
-                    }), {});
-                return cookies[item];
-            },
-            setItem: (item, value) => {
-                document.cookie = `${item}=${value};`
-            }
-        }
-
-        const storageType = cookieStorage;
-        const consentPropertyName = 'cookie_message';
-        const shouldShowPopup = () => !storageType.getItem(consentPropertyName);
-        const saveToStorage = () => storageType.setItem(consentPropertyName, true);
-
-        window.onload = () => {
-
-            const acceptFn = event => {
-                saveToStorage(storageType);
-                consentPopup.classList.add('hidden');
-            }
-            const consentPopup = document.getElementById('consent-popup');
-            const acceptBtn = document.getElementById('accept');
-            acceptBtn.addEventListener('click', acceptFn);
-
-            if (shouldShowPopup(storageType)) {
-                consentPopup.classList.remove('hidden');
-            }
-
-        };
     </script>
 
 </body>

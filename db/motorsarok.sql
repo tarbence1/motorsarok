@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2021 at 09:08 AM
+-- Generation Time: Apr 23, 2021 at 03:58 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -103,7 +103,8 @@ CREATE TABLE `garage` (
 INSERT INTO `garage` (`userid`, `motorcycleid`) VALUES
 (19, 178),
 (19, 182),
-(19, 240);
+(19, 240),
+(19, 241);
 
 -- --------------------------------------------------------
 
@@ -219,7 +220,9 @@ INSERT INTO `images` (`id`, `productid`, `thumbnailimage`, `is_mainimage`) VALUE
 (534, 239, 'uploads/16184786772.jpg', 0),
 (535, 239, 'uploads/16184786773.jpg', 0),
 (536, 239, 'uploads/16184786774.jpg', 0),
-(537, 240, 'uploads/1618480358motor2.jpg', 1);
+(537, 240, 'uploads/1618480358motor2.jpg', 1),
+(538, 241, 'uploads/16191068381.jpg', 1),
+(539, 242, 'uploads/16191104073.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -421,7 +424,7 @@ INSERT INTO `motorcycles` (`id`, `userid`, `created`, `status`, `manufacturer`, 
 (178, 19, '2021-03-11', 0, 'nhffg', 'ssdfd', 232, 'Trike', 2003, 11, 'Magyar okmányokkal', 'Lejárt okmányokkal', 23123, 0, 0, 0, 213123, 3, '', '', '', '', 'AM', '', '231', '', '123', '0', 'Veszprém', '2133111111'),
 (179, 18, '2021-03-12', 0, 'blabla', '100', 100, 'Trial', 2003, 10, 'Külföldi okmányokkal', 'Érvényes okmányokkal', 1212, 0, 0, 0, 12, 112, '', '', '', '', 'A', '', '1212', '', '1212', '0', 'Zala', '1212'),
 (180, 19, '2021-03-22', 0, 'hjhhg', '100', 100, 'Trike', 1967, 3, 'Külföldi okmányokkal', 'Lejárt okmányokkal', 100, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '100', '', '100', '0', 'Veszprém', '100'),
-(181, 19, '2021-03-22', 1, 'Alfer', 'sdf', 100, 'Trike', 1967, 1, 'Magyar okmányokkal', 'Érvényes okmányokkal', 100, 0, 0, 0, 100, 100, '', '', '', '', 'A', '', '100', '', '06301212121', '0', 'Veszprém', '100'),
+(181, 19, '2021-03-22', 0, 'Alfer', 'sdf', 100, 'Trike', 1967, 1, 'Magyar okmányokkal', 'Érvényes okmányokkal', 100, 0, 0, 0, 100, 100, '', '', '', '', 'A', '', '100', '', '06301212121', '0', 'Veszprém', '100'),
 (182, 19, '2021-03-22', 0, 'blabla', '100', 100, 'Trike', 1967, 1, 'Magyar okmányokkal', 'Érvényes okmányokkal', 100, 0, 0, 0, 100, 100, '', '', '', '', 'A', '', '100', '', '100', '0', 'Veszprém', '100'),
 (183, 19, '2021-03-22', 0, 'sdfhzf', 'ssdfd', 100, 'Trial', 1968, 2, 'Magyar okmányokkal', 'Érvényes okmányokkal', 100, 0, 0, 0, 100, 100, '', '', '', '', 'A', '', '100', '', '100', '0', 'Zala', '100'),
 (184, 19, '2021-03-30', 1, 'Bsa', '100', 110, 'Trial', 1967, 2, 'Magyar okmányokkal', 'Érvényes okmányokkal', 100, 0, 0, 0, 100, 100, '', '', '', '', 'A', '', '100', '', '100', '0', 'Veszprém', '100'),
@@ -437,7 +440,7 @@ INSERT INTO `motorcycles` (`id`, `userid`, `created`, `status`, `manufacturer`, 
 (194, 19, '2021-04-08', 1, 'Agroquad', '100', 10, 'Cruiser', 1951, 2, 'Külföldi okmányokkal', 'Érvényes okmányokkal', 1, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '10', '0', 'Bács-Kiskun', '10'),
 (195, 19, '2021-04-08', 1, 'Ajp', 'sd', 100, 'Custom', 1951, 2, 'Magyar okmányokkal', 'Lejárt okmányokkal', 1, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '10', '0', 'Budapest', '10'),
 (196, 19, '2021-04-08', 1, 'Alfer', 'asd', 10, 'Custom', 1952, 2, 'Magyar okmányokkal', 'Lejárt okmányokkal', 10, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '10', '0', 'Budapest', '10'),
-(197, 19, '2021-04-08', 0, 'Jawa', '100', 10, 'Custom', 1965, 2, 'Magyar okmányokkal', 'Érvényes okmányokkal', 10, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '10', '0', 'Vas', '10'),
+(197, 19, '2021-04-08', 1, 'Jawa', '100', 10, 'Custom', 1965, 2, 'Magyar okmányokkal', 'Érvényes okmányokkal', 10, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '10', '0', 'Vas', '10'),
 (198, 19, '2021-04-08', 1, 'Jawa', '999', 10, 'Custom', 1965, 2, 'Magyar okmányokkal', 'Érvényes okmányokkal', 10, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '10', '0', 'Vas', '10'),
 (199, 19, '2021-04-08', 1, 'Ajp', 'sd', 10, 'Cruiser', 1950, 10, 'Külföldi okmányokkal', 'Lejárt okmányokkal', 10, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '10', '0', 'Borsod-Abaúj-Zemplén', '10'),
 (200, 19, '2021-04-08', 1, 'KTM', '100', 10, 'Cruiser', 1952, 1, 'Külföldi okmányokkal', 'Lejárt okmányokkal', 10, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '10', '0', 'Budapest', '10'),
@@ -480,7 +483,9 @@ INSERT INTO `motorcycles` (`id`, `userid`, `created`, `status`, `manufacturer`, 
 (237, 19, '2021-04-15', 1, 'Ajp', '1000', 10, 'Cruiser', 1951, 4, 'Külföldi okmányokkal', 'Érvényes okmányokkal', 100, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '2147483647', '0', 'Budapest', '100'),
 (238, 19, '2021-04-15', 1, 'Ajp', 'sd', 100, 'Cruiser', 1951, 3, 'Külföldi okmányokkal', 'Lejárt okmányokkal', 100, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '2147483647', '0', 'Borsod-Abaúj-Zemplén', '100'),
 (239, 19, '2021-04-15', 1, 'Alfer', 'sd', 100, 'Cruiser', 1952, 3, 'Külföldi okmányokkal', 'Lejárt okmányokkal', 100, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '2147483647', '0', 'Borsod-Abaúj-Zemplén', '100'),
-(240, 19, '2021-04-15', 1, 'Amazonas', '100', 100, 'Cruiser', 1951, 2, 'Külföldi okmányokkal', 'Érvényes okmányokkal', 10, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', 'asd', '', '6301212121', '0', 'Vas', '100');
+(240, 19, '2021-04-15', 1, 'Amazonas', '100', 100, 'Cruiser', 1951, 2, 'Külföldi okmányokkal', 'Érvényes okmányokkal', 10, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', 'asd', '', '6301212121', '0', 'Vas', '100'),
+(241, 19, '2021-04-22', 1, 'Ajp', '<script>alert();</script>', 12, 'Chopper', 1966, 1, 'Magyar okmányokkal', 'Lejárt okmányokkal', 100, 0, 0, 0, 10, 10, '', '', '', '', 'A1', '', '10', '', '06301212121', '', 'Zala', '100'),
+(242, 19, '2021-04-22', 1, 'Ajp', '<script>alert();</script>', 232, 'Custom', 1968, 1, 'Magyar okmányokkal', 'Érvényes okmányokkal', 23, 34, 0, 0, 23, 23, '', '', '<script>alert();</script>', '', 'A2', '<script>alert();</script>', '<script>alert();</script>', '', '06301212121', '', 'Veszprém', '<script>alert();</script>');
 
 -- --------------------------------------------------------
 
@@ -635,7 +640,8 @@ CREATE TABLE `parts` (
 INSERT INTO `parts` (`id`, `userid`, `status`, `product_name`, `price`, `motorcycle_type`, `cond`, `description`, `name`, `email`, `phone`, `phone2`, `county`, `settlement`) VALUES
 (6, 19, 1, '12', 12, '', 'Kitünő', '', '12xd', '', '121212', '0', 'Budapest', '12xddx'),
 (7, 19, 0, '12uj', 2199, 'asdasduj', 'Hiányos', 'dsaadsassdauj', 'asduj', 'asd@asduj.hu', '2232399', '2399', 'Budapest', 'uj'),
-(8, 19, 1, 'Valami', 12, '12', 'Újszerű', '12', '12', 'asd@asd.hu', '36302187791', '', 'Pest', '12asd');
+(8, 19, 1, 'Valami', 12, '12', 'Újszerű', '12', '12', 'asd@asd.hu', '36302187791', '', 'Pest', '12asd'),
+(9, 19, 1, '<script>alert();</script>', 23, '<script>alert();</script>', 'Kitünő', '<script>alert();</script>', '<script>alert();</script>', '', '06301212121', '', 'Vas', '<script>alert();</script>');
 
 -- --------------------------------------------------------
 
@@ -692,7 +698,8 @@ INSERT INTO `parts_images` (`id`, `productid`, `thumbnailimage`, `is_mainimage`)
 (36, 8, 'parts-uploads/1617006396Z02.jpg', 0),
 (37, 8, 'parts-uploads/16170064613.jpg', 0),
 (38, 8, 'parts-uploads/16170064614.jpg', 0),
-(39, 8, 'parts-uploads/1617006461motor.jpg', 0);
+(39, 8, 'parts-uploads/1617006461motor.jpg', 0),
+(40, 9, 'parts-uploads/1619112451lanc_lanckerek.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -784,10 +791,11 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `avatar`, `created`,
 (14, '232323', 'fdf@g.hu', '$2y$10$GuLe4u9pKu7x.xYn/rMy4OZIbyWxjrFKUvYRYjEj4MTe09biqCmUe', '', '2020-12-23 11:59:36', NULL, '0000-00-00 00:00:00', NULL, 0),
 (15, '233223', 'fd@g.hz', '$2y$10$d6cqaS6cnIOMWZmc.oOeJOSard4pJTekF.C176C1r2o.byN23anRe', '', '2020-12-23 12:03:14', NULL, '0000-00-00 00:00:00', NULL, 0),
 (16, '23232323', 'df@h.hu', '$2y$10$q0cfacLkLxR7TXzoyH5VDu69n/5V.Jnxj81/6a7Dz8Mp4UDk7X65W', '', '2020-12-23 12:03:49', NULL, '0000-00-00 00:00:00', NULL, 0),
-(17, 'asd', 'j@xn--1ca4cwoked.hu', '$2y$10$Tf5FLoO8Bz1y/Hg8W23OU.vrNQYm6gui9ltdHFwtK/GcMmFFJaVVi', 'avatars/1614541428bill.jpg', '2020-12-26 19:15:54', 3, '2021-03-24 14:29:56', '2021-04-23 14:29:56', 1),
-(18, 'űűű', 'asd@xn--5gaaa.hu', '$2y$10$/ol8VtoSh8/k/Dx0tURTBOw5zjc7o5VhRbaDWpxdOb8HsEwhidNxW', '', '2020-12-26 19:16:50', 1, '2021-03-24 12:47:43', '2021-04-23 12:47:43', 0),
-(19, 'qwe', 'qwe@qwe.hu', '$2y$10$Nfl0RUIg.l5OBPOVMoS54eisoyO6ZhzmL/3nArTPa9.fAlaV7Kb8G', 'avatars/1618568280bill.jpg', '2020-12-26 19:36:06', 3, '2021-03-24 11:31:37', '2021-04-23 11:31:37', 1),
-(20, 'teszt', 'test@teszt.hu', '$2y$10$3eePdig5TekbPJ5Fw15n2e/iOCzVZgWjR8CzRsgEF5Y0ZnoKGK6xi', '', '2021-03-24 14:24:33', 3, '2021-03-24 14:27:52', '2021-04-23 14:27:52', 1);
+(17, 'asd', 'j@xn--1ca4cwoked.hu', '$2y$10$Tf5FLoO8Bz1y/Hg8W23OU.vrNQYm6gui9ltdHFwtK/GcMmFFJaVVi', 'avatars/1614541428bill.jpg', '2020-12-26 19:15:54', 0, '2021-03-24 14:29:56', '2021-04-23 14:29:56', 1),
+(18, 'űűű', 'asd@xn--5gaaa.hu', '$2y$10$/ol8VtoSh8/k/Dx0tURTBOw5zjc7o5VhRbaDWpxdOb8HsEwhidNxW', '', '2020-12-26 19:16:50', 0, '2021-03-24 12:47:43', '2021-04-23 12:47:43', 0),
+(19, 'qwe', 'tarbence1@gmail.com', '$2y$10$kx7QPh.YvqnahRKlJ4dLRO.G.n9XJkqSPJaXQCEcVCoDKHdmPaMl6', 'avatars/1619011806bill.jpg', '2020-12-26 19:36:06', 0, '2021-03-24 11:31:37', '2021-04-23 11:31:37', 1),
+(20, 'teszt', 'test@teszt.hu', '$2y$10$3eePdig5TekbPJ5Fw15n2e/iOCzVZgWjR8CzRsgEF5Y0ZnoKGK6xi', '', '2021-03-24 14:24:33', 0, '2021-03-24 14:27:52', '2021-04-23 14:27:52', 1),
+(21, 'belaksdksdm', 'gdldm@asdasdknog.hu', '$2y$10$QYfHjQJ3y7eg81TRFY531uxOVJR9qwZA3y6o6KdKKXmwMoTBdpaMC', '', '2021-04-22 21:22:58', 0, NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -922,7 +930,7 @@ ALTER TABLE `counties`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=538;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=540;
 
 --
 -- AUTO_INCREMENT for table `manufacturers`
@@ -934,7 +942,7 @@ ALTER TABLE `manufacturers`
 -- AUTO_INCREMENT for table `motorcycles`
 --
 ALTER TABLE `motorcycles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
 
 --
 -- AUTO_INCREMENT for table `motorcycle_types`
@@ -946,13 +954,13 @@ ALTER TABLE `motorcycle_types`
 -- AUTO_INCREMENT for table `parts`
 --
 ALTER TABLE `parts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `parts_images`
 --
 ALTER TABLE `parts_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `safety_equipment`
@@ -970,7 +978,7 @@ ALTER TABLE `technical_equipment`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
@@ -1027,6 +1035,16 @@ ALTER TABLE `parts`
 --
 ALTER TABLE `parts_garage`
   ADD CONSTRAINT `parts_partid` FOREIGN KEY (`partid`) REFERENCES `parts` (`id`);
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `statusChange` ON SCHEDULE EVERY 1 DAY STARTS '2021-01-01 14:35:20' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE motorcycles SET status = 0 WHERE created<=CURRENT_DATE - INTERVAL 30 DAY$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `premiumExp` ON SCHEDULE EVERY 1 DAY STARTS '2021-04-23 13:18:22' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE users SET premium= 0 WHERE premiumexpiration<=CURRENT_DATE$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

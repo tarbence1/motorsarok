@@ -1075,27 +1075,6 @@ if (
     <!-- Show selected main image data -->
     <script src="assets/JS/image-data.js"></script>
 
-
-    <!-- Hide select options NOT GOOD -->
-    <script>
-        /*
-        let values = []
-        $("option").each((index, item) => {
-            let {
-                value
-            } = item //item.value is the value of our current option in the loop
-
-            // check if value is already in values array
-            if (values.includes(value)) {
-                // delete duplicate from the DOM
-                item.remove()
-            } else {
-                // push value to values array so that duplicates can be detected later on
-                values.push(value)
-            }
-        })*/
-    </script>
-
     <!-- Image uploader -->
     <script>
         $('.input-images').imageUploader({
