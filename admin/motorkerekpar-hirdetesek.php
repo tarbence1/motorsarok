@@ -173,7 +173,7 @@ $safety_stmt->bind_param("i", $productid);
 
             ?>
 
-                    <a href="#" data-toggle="modal" data-target="#modal-<?php echo $row['id']; ?>">
+                    <a href="#" data-toggle="modal" data-target="#modal-<?php echo htmlspecialchars($row['id']); ?>">
                         <div class="card" id="motor-cards">
                             <?php
                             // Walk around the image array
@@ -187,29 +187,29 @@ $safety_stmt->bind_param("i", $productid);
                                 $i++;
                             }
 
-                            echo "<img src='" . $mainimage . "' class='card-img-top' alt='Main Image'/>";
+                            echo "<img src='" . htmlspecialchars($mainimage) . "' class='card-img-top' alt='Main Image'/>";
 
 
 
                             ?>
                             <div class="card-body">
                                 <div class="short-data">
-                                    <h5 class="card-title"><?php echo $row['manufacturer'] . ' ' . $row['model']; ?></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $row['price']; ?> Ft</h6>
+                                    <h5 class="card-title"><?php echo htmlspecialchars($row['manufacturer']) . ' ' . htmlspecialchars($row['model']); ?></h5>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo htmlspecialchars($row['price']); ?> Ft</h6>
                                     <div class="card-footer">
-                                        <i class="fas fa-calendar-alt text-center" data-toggle="tooltip" title="Évjárat"><br><?php echo $row['year']; ?></i>
-                                        <i class="fas fa-road text-center" data-toggle="tooltip" title="Kilométeróra állása"><br><?php echo $row['kilometers']; ?> km</i>
-                                        <i class="fas fa-tachometer-alt text-center" data-toggle="tooltip" title="Hengerűrtartalom"><br><?php echo $row['capacity']; ?> cm³</i>
-                                        <i class="fas fa-id-card text-center" data-toggle="tooltip" title="Jogosítvány típusa"><br><?php echo $row['license']; ?></i>
+                                        <i class="fas fa-calendar-alt text-center" data-toggle="tooltip" title="Évjárat"><br><?php echo htmlspecialchars($row['year']); ?></i>
+                                        <i class="fas fa-road text-center" data-toggle="tooltip" title="Kilométeróra állása"><br><?php echo htmlspecialchars($row['kilometers']); ?> km</i>
+                                        <i class="fas fa-tachometer-alt text-center" data-toggle="tooltip" title="Hengerűrtartalom"><br><?php echo htmlspecialchars($row['capacity']); ?> cm³</i>
+                                        <i class="fas fa-id-card text-center" data-toggle="tooltip" title="Jogosítvány típusa"><br><?php echo htmlspecialchars($row['license']); ?></i>
                                     </div>
                                 </div>
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-<?php echo $row['id']; ?>">Részletek</a>
+                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-<?php echo htmlspecialchars($row['id']); ?>">Részletek</a>
                                 <hr>
                                 <form action="" method="POST" onsubmit="return confirm('Biztosan törölni szeretné?');">
                                     <div class="float-right">
-                                        <input type="hidden" value="<?php echo $row['id']; ?>" name="advert-id">
+                                        <input type="hidden" value="<?php echo htmlspecialchars($row['id']); ?>" name="advert-id">
 
-                                        <a href="hirdetes-modositas.php?id=<?php echo $row['id']; ?>" class="btn btn-warning" role="button">Módosítás</a>
+                                        <a href="hirdetes-modositas.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-warning" role="button">Módosítás</a>
                                         <input type='submit' value="Törlés" name="delete" id="btn-delete" />
                                     </div>
                                 </form>
@@ -219,16 +219,16 @@ $safety_stmt->bind_param("i", $productid);
 
                     <!-- Details Modal -->
 
-                    <div class="modal full" id="modal-<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+                    <div class="modal full" id="modal-<?php echo htmlspecialchars($row['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
                         <div class="modal-dialog-full-width modal-dialog momodel modal-fluid" role="document" id="modalFull">
                             <div class="modal-content-full-width modal-content ">
                                 <div class=" modal-header-full-width   modal-header text-center">
-                                    <h5 class="modal-title w-100" id="detailsModalLabel"><?php echo $row['manufacturer'] . ' ' . $row['model']; ?></h5>
+                                    <h5 class="modal-title w-100" id="detailsModalLabel"><?php echo htmlspecialchars($row['manufacturer']) . ' ' . htmlspecialchars($row['model']); ?></h5>
                                     <button type="button" class="close " data-dismiss="modal" aria-label="Bezárás">
                                         <span style="font-size: 1.3em;" aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div id="imageGallery<?php echo $row['id']; ?>" class="carousel slide" data-ride="carousel">
+                                <div id="imageGallery<?php echo htmlspecialchars($row['id']); ?>" class="carousel slide" data-ride="carousel">
 
                                     <!-- Indicators -->
                                     <ul class="carousel-indicators">
@@ -240,7 +240,7 @@ $safety_stmt->bind_param("i", $productid);
                                                 $actives = 'active';
                                             }
                                         ?>
-                                            <li data-target="#imageGallery<?php echo $row['id']; ?>" data-slide-to="<?php echo $i; ?>" class="<?php echo $actives; ?>"></li>
+                                            <li data-target="#imageGallery<?php echo htmlspecialchars($row['id']); ?>" data-slide-to="<?php echo $i; ?>" class="<?php echo $actives; ?>"></li>
                                         <?php
                                             $i++;
                                         }
@@ -262,17 +262,17 @@ $safety_stmt->bind_param("i", $productid);
 
                                         ?>
                                             <div class="carousel-item <?php echo $actives ?>">
-                                                <a href="#imagemodal-<?php echo $rec['id'] ?>" data-toggle="modal" data-target="#imagemodal-<?php echo $rec['id'] ?>">
-                                                    <img src="<?php echo $image ?>" class="img-fluid" id="thumbnailimage">
+                                                <a href="#imagemodal-<?php echo htmlspecialchars($rec['id']) ?>" data-toggle="modal" data-target="#imagemodal-<?php echo htmlspecialchars($rec['id']) ?>">
+                                                    <img src="<?php echo htmlspecialchars($image) ?>" class="img-fluid" id="thumbnailimage">
                                                 </a>
                                             </div>
 
 
                                             <!-- Thumbnail image modal -->
                                             <div class="modal-wrapper" style="z-index: 999999;">
-                                                <div id="imagemodal-<?php echo $rec['id'] ?>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div id="imagemodal-<?php echo htmlspecialchars($rec['id']) ?>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" id="centered">
-                                                        <img src="<?php echo $image ?>" id="galleryImage" class="img-thumbnail">
+                                                        <img src="<?php echo htmlspecialchars($image) ?>" id="galleryImage" class="img-thumbnail">
                                                     </div>
                                                 </div>
                                             </div>
@@ -284,10 +284,10 @@ $safety_stmt->bind_param("i", $productid);
                                     </div>
 
                                     <!-- Left and right controls -->
-                                    <a class="carousel-control-prev" href="#imageGallery<?php echo $row['id']; ?>" data-slide="prev">
+                                    <a class="carousel-control-prev" href="#imageGallery<?php echo htmlspecialchars($row['id']); ?>" data-slide="prev">
                                         <span class="carousel-control-prev-icon"></span>
                                     </a>
-                                    <a class="carousel-control-next" href="#imageGallery<?php echo $row['id']; ?>" data-slide="next">
+                                    <a class="carousel-control-next" href="#imageGallery<?php echo htmlspecialchars($row['id']); ?>" data-slide="next">
                                         <span class="carousel-control-next-icon"></span>
                                     </a>
 
@@ -299,7 +299,7 @@ $safety_stmt->bind_param("i", $productid);
                                         <?php if (!empty($row['description'])) {
                                             echo '<h5 id="description">Leírás</h5><hr>
                                             <div id="description-text">'
-                                                . $row["description"] .
+                                                . htmlspecialchars($row["description"]) .
                                                 '</div>';
                                         }
                                         ?>
@@ -310,48 +310,48 @@ $safety_stmt->bind_param("i", $productid);
                                             </tr>
                                             <tr>
                                                 <td><i class="fas fa-money-bill-wave"><span style="padding-left: 10px;">Vételár:</span></i></td>
-                                                <td><?php echo $row['price']; ?> Ft</td>
+                                                <td><?php echo htmlspecialchars($row['price']); ?> Ft</td>
                                             </tr>
                                             <tr>
                                                 <td><i class="fas fa-calendar-alt"><span style="padding-left: 10px;">Évjárat:</span></i></td>
-                                                <td><?php echo $row['year'] . '/' . $row['month']; ?></td>
+                                                <td><?php echo htmlspecialchars($row['year']) . '/' . $row['month']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td><i class="fas fa-road"><span style="padding-left: 10px;">Kilométeróra
                                                             állása:</span></i></td>
-                                                <td><?php echo $row['kilometers']; ?> km</td>
+                                                <td><?php echo htmlspecialchars($row['kilometers']); ?> km</td>
                                             </tr>
                                             <tr>
                                                 <td><i class="fas fa-tachometer-alt"><span style="padding-left: 10px;">Hengerűrtartalom:</span></i></td>
-                                                <td><?php echo $row['capacity']; ?> cm³</td>
+                                                <td><?php echo htmlspecialchars($row['capacity']); ?> cm³</td>
                                             </tr>
                                             <tr>
                                                 <td><i class="fas fa-power-off"><span style="padding-left: 10px;">Teljesítmény:</span></i></td>
-                                                <td><?php echo $row['performance']; ?> kW</td>
+                                                <td><?php echo htmlspecialchars($row['performance']); ?> kW</td>
                                             </tr>
                                             <tr>
                                                 <?php if (!empty($row['fuel'])) {
                                                     echo '<tr>
                                                 <td><i class="fas fa-oil-can"><span style="padding-left: 10px;">Üzemanyag:</span></i></td>
-                                                <td>' . $row["fuel"] .  '</td>
+                                                <td>' . htmlspecialchars($row["fuel"]) .  '</td>
                                             </tr>';
                                                 }
                                                 ?>
 
                                                 <td><i class="fas fa-motorcycle"><span style="padding-left: 10px;">Kivitel:</span></i>
                                                 </td>
-                                                <td><?php echo $row['type']; ?></td>
+                                                <td><?php echo htmlspecialchars($row['type']); ?></td>
                                             </tr>
                                             <?php if (!empty($row['enginetype'])) {
                                                 echo '<tr>
                                                 <td><i class="fas fa-dumbbell"><span style="padding-left: 10px;">Munkaütem:</span></i></td>
-                                                <td>' . $row["enginetype"] .  '</td>
+                                                <td>' . htmlspecialchars($row["enginetype"]) .  '</td>
                                             </tr>';
                                             }
                                             ?>
                                             <tr>
                                                 <td><i class="fas fa-id-card text-md-left"><span style="padding-left: 10px;">Jogosítvány típusa:</span></i></td>
-                                                <td><?php echo $row['license']; ?></td>
+                                                <td><?php echo htmlspecialchars($row['license']); ?></td>
                                             </tr>
 
                                             <tr>
@@ -362,19 +362,19 @@ $safety_stmt->bind_param("i", $productid);
                                             <tr>
                                                 <td><i class="fas fa-paste"><span style="padding-left: 10px;">Okmányok
                                                             jellege:</span></i></td>
-                                                <td><?php echo $row['documents']; ?></td>
+                                                <td><?php echo htmlspecialchars($row['documents']); ?></td>
                                             </tr>
                                             <tr>
                                                 <td><i class="fas fa-file"><span style="padding-left: 10px;">Okmányok
                                                             érvényessége:</span></i></td>
-                                                <td><?php echo $row['documentsvalidity']; ?></td>
+                                                <td><?php echo htmlspecialchars($row['documentsvalidity']); ?></td>
                                             </tr>
 
                                             <?php if (!empty($row['motyear'])) {
                                                 echo '<tr>
                                                 <td><i class="fas fa-calendar-check"><span style="padding-left: 10px;">Műszaki vizsga
                                                 érvényes:</span></i></td>
-                                                <td>' . $row['motyear'] . '/' . $row['motmonth'] . '</td>
+                                                <td>' . htmlspecialchars($row['motyear']) . '/' . htmlspecialchars($row['motmonth']) . '</td>
                                             </tr>';
                                             }
                                             if (count($technical_data) && count($comfort_data) && count($safety_data)) {
@@ -435,24 +435,24 @@ $safety_stmt->bind_param("i", $productid);
 
                                             <tr>
                                                 <td><i class="fas fa-user"><span style="padding-left: 10px;">Név:</span></i></td>
-                                                <td><?php echo $row['name']; ?></td>
+                                                <td><?php echo htmlspecialchars($row['name']); ?></td>
                                             </tr>
                                             <?php if (!empty($row['email'])) {
                                                 echo '<tr>
                                                         <td><i class="fas fa-at"><span style="padding-left: 10px;">Email cím:</span></i></td>
-                                                        <td><a href="mailto:' . $row['email'] . '">' . $row["email"] .  '</td>
+                                                        <td><a href="mailto:' . htmlspecialchars($row['email']) . '">' . htmlspecialchars($row["email"]) .  '</td>
                                                         </tr>';
                                             }
                                             ?>
 
                                             <tr>
                                                 <td><i class="fas fa-mobile-alt"><span style="padding-left: 10px;">Telefonszám:</span></i></td>
-                                                <td><a href="tel:<?php echo $row['phone']; ?>"><?php echo $row['phone']; ?></a></td>
+                                                <td><a href="tel:<?php echo htmlspecialchars($row['phone']); ?>"><?php echo htmlspecialchars($row['phone']); ?></a></td>
                                             </tr>
                                             <?php if (!empty($row['phone2'])) {
                                                 echo '<tr>
                                                         <td><i class="fas fa-phone-volume"><span style="padding-left: 10px;">Másodlagos telefonszám:</span></i></td>
-                                                        <td><a href="tel:' . $row['phone2'] . '">' . $row["phone2"] .  '</td> 
+                                                        <td><a href="tel:' . htmlspecialchars($row['phone2']) . '">' . htmlspecialchars($row["phone2"]) .  '</td> 
                                                         </tr>';
                                             }
                                             ?>
@@ -465,7 +465,7 @@ $safety_stmt->bind_param("i", $productid);
                                                         $county = ' megye';
                                                     }
 
-                                                    echo $row['settlement'] . ', ' . $row['county'] . $county; ?>
+                                                    echo htmlspecialchars($row['settlement']) . ', ' . htmlspecialchars($row['county']) . $county; ?>
                                                 </td>
 
                                             </tr>
@@ -564,7 +564,6 @@ $safety_stmt->bind_param("i", $productid);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <!-- jQuery Custom Scrollbar -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
     <!-- Jump to top -->
     <script src="../assets/JS/jump-to-top.js"></script>
     <!-- Tooltips -->

@@ -124,6 +124,18 @@ $safety_stmt->bind_param("i", $productid);
                                 <a class="dropdown-item" href="alkatresz-hirdetesfeladas.php">Alkatrész</a>
                             </div>
                         </li>
+                        <?php
+                        if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+                        ?>
+                            <li class="nav-item">
+                                <a href="./admin/admin.php" class="nav-link d-flex flex-column">
+                                    <i class="fas fa-code fa-lg"></i>
+                                    <span class="d-sm-inline mt-1">admin</span>
+                                </a>
+                            </li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -421,7 +433,7 @@ $safety_stmt->bind_param("i", $productid);
                                                 echo "</td></tr>";
                                             }
                                             ?>
-                                            
+
                                             <tr>
                                                 <th style="padding-top: 50px;">Eladó adatai</th>
                                                 <td></td>
