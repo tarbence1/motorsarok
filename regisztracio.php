@@ -4,7 +4,7 @@ session_start();
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$username = $password = $confirm_password  = $is_admin = $email = $recaptcha_err = "";
+$username = $password = $confirm_password = $email = $recaptcha_err = "";
 $username_err = $password_err = $confirm_password_err = $email_err = "";
 
 

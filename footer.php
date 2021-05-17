@@ -28,6 +28,10 @@
                                     <a href="./documents/ÁSZF-minta.pdf">Általános szerződési feltételek</a>
 
                                 </p>
+                                <p>
+                                    <a href="./documents/adatkezelesi-tajekoztato-minta.pdf">Adatkezelési tájékoztató</a>
+
+                                </p>
                             </div>
                         </div>
                     </div>

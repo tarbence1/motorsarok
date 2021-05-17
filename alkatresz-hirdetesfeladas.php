@@ -183,7 +183,7 @@ if ($counted >= $maxAds) {
                 <h2 class="display-6">Alkatrész hirdetésfeladás</h2>
                 <ul class="fa-ul">
                     <?php
-                    echo htmlspecialchars($maxAdsInfo);
+                    echo $maxAdsInfo;
                     ?>
                 </ul>
                 <h5 class="data">Képek feltöltése</h5>
@@ -191,10 +191,10 @@ if ($counted >= $maxAds) {
                 <ul class="fa-ul">
                     <?php
                     if (empty($premiumInfo)) {
-                        echo '<li><span class="fa-li"><i class="fas fa-info-circle"></i></span>Ön jelenleg <b>nem</b> rendelkezik prémium csomaggal, így maximum <b>' . htmlspecialchars($maxImage) . '</b> képet tölhet fel.</li>';
+                        echo '<li><span class="fa-li"><i class="fas fa-info-circle"></i></span>Ön jelenleg <b>nem</b> rendelkezik prémium csomaggal, így maximum <b>' . $maxImage . '</b> képet tölhet fel.</li>';
                         echo '<li><span class="fa-li"><i class="fas fa-info-circle"></i></span>Amennyiben szeretne a csomagok közül választani, <b><a href="profile.php">ide</a></b> kattintva választhat egyet.</li>';
                     } else {
-                        echo '<li><span class="fa-li"><i class="fas fa-info-circle"></i></span>Ön jelenleg <b><span id="' . htmlspecialchars($premiumColor) . '">' . htmlspecialchars($premiumInfo) . '</span></b> csomaggal rendelkezik, így maximum <b>' . htmlspecialchars($maxImage) . '</b> képet tölthet fel.</li>';
+                        echo '<li><span class="fa-li"><i class="fas fa-info-circle"></i></span>Ön jelenleg <b><span id="' . $premiumColor . '">' . $premiumInfo . '</span></b> csomaggal rendelkezik, így maximum <b>' . $maxImage . '</b> képet tölthet fel.</li>';
                     }
                     ?>
                     <li>
